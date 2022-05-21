@@ -21,6 +21,10 @@ const Home = ({ id, go, fetchedUser }) => (
 				<Button stretched size="l" mode="secondary" onClick={go} data-to="persik">
 					Show me the Persik, please
 				</Button>
+				<h3/>
+				<Button stretched size="l" mode="secondary" onClick={go} data-to="chat">
+					Lemme see the chat
+				</Button>
 			</Div>
 		</Group>
 	</Panel>
