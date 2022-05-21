@@ -12,7 +12,7 @@ const Chat = props => (
 		>
 			Chat
 		</PanelHeader>
-        <MessageList></MessageList>
+        <MessageList/>
         <FixedLayout filled vertical='bottom'>
             <MessageBox/>
         </FixedLayout>
