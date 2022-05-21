@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
-import { FixedLayout, Panel, PanelHeader, PanelHeaderBack, Spacing } from '@vkontakte/vkui';
-import MessageComp from '../components/MessageComp';
-import MessageBox from '../components/MessageBox';
+import { View, CardGrid, ContentCard, Input, Button, FixedLayout, Panel, PanelHeader, PanelHeaderBack, Spacing } from '@vkontakte/vkui';
+import MessageBoxButton from '../components/MessageBoxButton';
+import { create } from 'domain';
 
 function ChatComp() {
     const [messages, setMessages] = useState([
-        { id: 1, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
-        { id: 2, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
-        { id: 3, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
-        { id: 4, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
-        { id: 5, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
-        { id: 6, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
-        { id: 7, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
-        { id: 8, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
-        { id: 9, sender_name: 'Lev', text: 'Я щас вымок весь под дождём(' },
-        { id: 10, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' }
+        { key: 1, sender_name: 'sss', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
+        { key: 2, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
+        { key: 3, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
+        { key: 4, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
+        { key: 5, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
+        { key: 6, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
+        { key: 7, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
+        { key: 8, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
+        { key: 9, sender_name: 'Lev', text: 'Я щас вымок весь под дождём(' },
+        { key: 10, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' }
     ])
+    const [msgs, setMsgs] = useState('')
 
     // const addNewMsg = (e) => {
     //     e.preventDefault()
@@ -26,19 +27,56 @@ function ChatComp() {
     //     }
     //     setMsgs(...msgs, newMsg)
     // }
-    
-    const messagesList = messages.map(message =>
-        <MessageComp message={message} key={message.id} />
+
+    const messagesList = Object.keys(messages).map((message) =>
+        <div key={message.toString()}>
+            <CardGrid size="l">
+                <ContentCard
+                    subtitle={messages[message].sender_name}
+                    mode="outline"
+                    text={messages[message].text} />
+            </CardGrid>
+            <Spacing></Spacing>
+        </div>
+        // <MessageComp key={message} id={message.id} sender_name={message.sender_name} text={message.text}/>
     )
+
+    const sendMessage = (e) => {
+        e.preventDefault();
+        const newMsg = {
+            id: Date.now(),
+            sender_name: 'wlsdw',
+            text: msgs
+        }
+        setMessages([...messages, newMsg])
+        setMsgs('')
+    }
 
     return (
         <div>
-            {messagesList}
+            <Panel>
+                {messagesList}
+            </Panel>
 
             <Spacing size={38} />
 
             <FixedLayout filled vertical='bottom'>
-                <MessageBox/>
+                <section className="MessageBox">
+                    <form>
+                        <Input
+                            type="text"
+                            value={msgs}
+                            onChange={e => setMsgs(e.target.value)}
+                            placeholder="Type message to send"
+                            after={
+                                <MessageBoxButton
+                                    type="submit"
+                                    onClick={sendMessage}
+                                    size="l" />
+                            }
+                        />
+                    </form>
+                </section>
             </FixedLayout>
         </div>
     );

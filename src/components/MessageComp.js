@@ -7,13 +7,13 @@ const MessageComp = (props) => {
 
     return (
 
-        <View activePanel="test">
-            <Panel id="test">
+        <View activePanel={props.id}>
+            <Panel id={props.id}>
                 <CardGrid size="l">
                     <ContentCard
-                        subtitle={props.message.sender_name}
+                        subtitle={props.sender_name}
                         mode="outline"
-                        text={props.message.text} />
+                        text={props.text} />
                 </CardGrid>
                 <Spacing></Spacing>
             </Panel>
