@@ -1,8 +1,9 @@
 import { Button, Input } from '@vkontakte/vkui';
 import { create } from 'domain';
 import React, { useState } from 'react';
+import MessageBoxButton from './MessageBoxButton';
 
-const MessageBox = (/*{create}*/) => {
+const MessageBox = (props) => {
     const [msg, setMsg] = useState({ id: '', sender_name: '', text: '' });
 
 
@@ -26,18 +27,13 @@ const MessageBox = (/*{create}*/) => {
     return (
         <section className="MessageBox">
             <form>
-                <Input
+                <Input {...props}
                     type="text"
                     value={msg.text}
                     onChange={e => setMsg({ ...msg, text: e.target.value })}
                     placeholder="Type message to send"
-                    after={<Button
-                        type="submit"
-                        onClick={sendMessage}
-                        size="l"
-                    >
-                        Send
-                    </Button>} />
+                    after={<MessageBoxButton type="submit" onClick={sendMessage} size="l"></MessageBoxButton>}
+                />
             </form>
         </section>
     );
