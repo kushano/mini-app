@@ -1,17 +1,10 @@
 import { Button, Input } from '@vkontakte/vkui';
-import React from 'react';
+import { create } from 'domain';
+import React, { useState } from 'react';
 
-class MessageBox extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            message: ''
-        };
-    }
+const MessageBox = () => {
+    const [msg, setMsg] = useState({ id: '', sender_name: '', text: '' });
 
-    currentMessageChanged = (e) => {
-        this.setState({message: e.target.value });
-    }
 
     // sendMessage = async (e) => {
     //     e.preventDefault();
@@ -21,31 +14,34 @@ class MessageBox extends React.Component {
     //     }
     // }
 
-    sendMessage = async (e) => {
+    const sendMessage = async (e) => {
         e.preventDefault();
+        const newMsg = {
+            ...msg, id: Date.now()
+        }
+        create(newMsg)
+        setMsg({ sender_name: '', text: '' })
 
     }
 
-    render(){
-        return (
-            <section className="MessageBox">
-                <form>
-                    <Input 
-                        type="text" 
-                        value={this.state.message} 
-                        onChange={this.currentMessageChanged} 
-                        placeholder="Type message to send"
-                        after={<Button 
-                            type="submit" 
-                            onClick={this.sendMessage}
-                            size="l"
-                        >
-                            Send
-                        </Button>}/>
-                </form>
-            </section>
-        );
-    }
+    return (
+        <section className="MessageBox">
+            <form>
+                <Input
+                    type="text"
+                    value={msg.text}
+                    onChange={e => setMsg({ ...msg, text: e.target.value })}
+                    placeholder="Type message to send"
+                    after={<Button
+                        type="submit"
+                        onClick={sendMessage}
+                        size="l"
+                    >
+                        Send
+                    </Button>} />
+            </form>
+        </section>
+    );
 }
 
 export default MessageBox;
