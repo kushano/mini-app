@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { FixedLayout, Panel, PanelHeader, PanelHeaderBack } from '@vkontakte/vkui';
 import ChatComp from '../components/ChatComp';
 
-const Chat = props => (
+const Chat = ({fetchedUser, ...props}) => (
 
 	<Panel id={props.id}>
         <PanelHeader
@@ -12,13 +12,21 @@ const Chat = props => (
 		>
 			Chat
 		</PanelHeader>
-		<ChatComp></ChatComp>
+		<ChatComp first_name={fetchedUser.first_name} last_name={fetchedUser.last_name}></ChatComp>
 	</Panel>
 );
 
 Chat.propTypes = {
 	id: PropTypes.string.isRequired,
 	go: PropTypes.func.isRequired,
+	fetchedUser: PropTypes.shape({
+		photo_200: PropTypes.string,
+		first_name: PropTypes.string,
+		last_name: PropTypes.string,
+		city: PropTypes.shape({
+			title: PropTypes.string,
+		}),
+	}),
 };
 
 export default Chat;

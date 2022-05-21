@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, CardGrid, ContentCard, Input, Button, FixedLayout, Panel, PanelHeader, PanelHeaderBack, Spacing } from '@vkontakte/vkui';
+import bridge from '@vkontakte/vk-bridge';
+import { ScreenSpinner, CardGrid, ContentCard, Input, Button, FixedLayout, Panel, PanelHeader, PanelHeaderBack, Spacing } from '@vkontakte/vkui';
 
-function ChatComp() {
+function ChatComp(props) {
     const messagesEndRef = useRef(null)
     const [messages, setMessages] = useState([
         { key: 1, sender_name: 'sss', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
@@ -16,6 +17,7 @@ function ChatComp() {
         { key: 10, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' }
     ])
     const [msgs, setMsgs] = useState('')
+    
 
     const scrollToBottom = () => {
         messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
@@ -41,7 +43,7 @@ function ChatComp() {
         e.preventDefault();
         const newMsg = {
             id: Date.now(),
-            sender_name: 'wlsdw',
+            sender_name: props.first_name + ' '+ props.last_name,
             text: msgs
         }
         if (msgs.length > 0 & msgs != " ") {

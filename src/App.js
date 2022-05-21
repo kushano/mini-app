@@ -41,7 +41,7 @@ const App = () => {
 							<View activePanel={activePanel}>
 								<Home id='home' fetchedUser={fetchedUser} go={go} />
 								<Persik id='persik' go={go} />
-								<Chat id='chat' go={go} />
+								<Chat id='chat' fetchedUser={fetchedUser} go={go} />
 							</View>
 						</SplitCol>
 					</SplitLayout>
