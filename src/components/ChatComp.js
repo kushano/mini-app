@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { View, CardGrid, ContentCard, Input, Button, FixedLayout, Panel, PanelHeader, PanelHeaderBack, Spacing } from '@vkontakte/vkui';
-import MessageBoxButton from '../components/MessageBoxButton';
-import { create } from 'domain';
 
 function ChatComp() {
+    const messagesEndRef = useRef(null)
     const [messages, setMessages] = useState([
         { key: 1, sender_name: 'sss', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
         { key: 2, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
@@ -18,15 +17,11 @@ function ChatComp() {
     ])
     const [msgs, setMsgs] = useState('')
 
-    // const addNewMsg = (e) => {
-    //     e.preventDefault()
-    //     const newMsg ={
-    //         id: Date.now(),
-    //         sender_name,
-    //         text
-    //     }
-    //     setMsgs(...msgs, newMsg)
-    // }
+    const scrollToBottom = () => {
+        messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+    }
+
+    useEffect(scrollToBottom, [messages]);
 
     const messagesList = Object.keys(messages).map((message) =>
         <div key={message.toString()}>
@@ -37,6 +32,7 @@ function ChatComp() {
                     text={messages[message].text} />
             </CardGrid>
             <Spacing></Spacing>
+            <div ref={messagesEndRef}></div>
         </div>
         // <MessageComp key={message} id={message.id} sender_name={message.sender_name} text={message.text}/>
     )
@@ -69,10 +65,13 @@ function ChatComp() {
                             onChange={e => setMsgs(e.target.value)}
                             placeholder="Type message to send"
                             after={
-                                <MessageBoxButton
+                                <Button
                                     type="submit"
                                     onClick={sendMessage}
-                                    size="l" />
+                                    size="l"
+                                >
+                                    Send
+                                </Button>
                             }
                         />
                     </form>
