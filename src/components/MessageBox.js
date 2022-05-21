@@ -2,7 +2,7 @@ import { Button, Input } from '@vkontakte/vkui';
 import { create } from 'domain';
 import React, { useState } from 'react';
 
-const MessageBox = () => {
+const MessageBox = (/*{create}*/) => {
     const [msg, setMsg] = useState({ id: '', sender_name: '', text: '' });
 
 
@@ -21,7 +21,6 @@ const MessageBox = () => {
         }
         create(newMsg)
         setMsg({ sender_name: '', text: '' })
-
     }
 
     return (

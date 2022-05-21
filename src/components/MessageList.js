@@ -26,7 +26,7 @@ function MessageList(props) {
     ])
 
     const messagesList = messages.map(message =>
-        <MessageComp message={message} key={message.id} />  
+        <MessageComp message={message} key={message.id} />
     )
 
     return (
