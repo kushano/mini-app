@@ -1,6 +1,7 @@
 import React,  {useEffect, useState} from 'react';
 import MessageComp from '../components/MessageComp';
-import MessageBox from './MessageBox';
+
+import {Spacing} from '@vkontakte/vkui';
 
 function MessageList(props) {
     const messagesList = React.createRef();
@@ -18,7 +19,8 @@ function MessageList(props) {
         {sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути'},
         {sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути'},
         {sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути'},
-        {sender_name: 'Lev', text: 'Я щас вымок весь под дождём('}
+        {sender_name: 'Lev', text: 'Я щас вымок весь под дождём('},
+        {sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути'}
     ])
 
     return (
@@ -26,6 +28,7 @@ function MessageList(props) {
             {messages.map(message =>
                 <MessageComp message={message}/>
             )}
+            <Spacing size={36} />
         </div>
     );
 }
