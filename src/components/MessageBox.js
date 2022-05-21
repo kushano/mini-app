@@ -13,12 +13,17 @@ class MessageBox extends React.Component {
         this.setState({message: e.target.value });
     }
 
-    sendMessageClicked = async (e) => {
+    // sendMessage = async (e) => {
+    //     e.preventDefault();
+    //     if (this.state.message.length > 0) {
+    //         await this.props.onSendNewMessage(this.state.message);
+    //         this.setState({...this.state, ...{message : ''}});
+    //     }
+    // }
+
+    sendMessage = async (e) => {
         e.preventDefault();
-        if (this.state.message.length > 0) {
-            await this.props.onSendNewMessage(this.state.message);
-            this.setState({...this.state, ...{message : ''}});
-        }
+
     }
 
     render(){
@@ -32,7 +37,7 @@ class MessageBox extends React.Component {
                         placeholder="Type message to send"
                         after={<Button 
                             type="submit" 
-                            onClick={this.sendMessageClicked}
+                            onClick={this.sendMessage}
                             size="l"
                         >
                             Send
