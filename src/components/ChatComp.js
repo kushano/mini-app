@@ -1,23 +1,23 @@
 import React, { useState, useRef, useEffect } from 'react';
 import bridge from '@vkontakte/vk-bridge';
-import { ScreenSpinner, CardGrid, ContentCard, Input, Button, FixedLayout, Panel, PanelHeader, PanelHeaderBack, Spacing } from '@vkontakte/vkui';
+import { Avatar, ScreenSpinner, CardGrid, ContentCard, Input, Button, FixedLayout, Panel, PanelHeader, PanelHeaderBack, Spacing, FormLayoutGroup } from '@vkontakte/vkui';
 
 function ChatComp(props) {
     const messagesEndRef = useRef(null)
     const [messages, setMessages] = useState([
-        { key: 1, sender_name: 'sss', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
-        { key: 2, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
-        { key: 3, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
-        { key: 4, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
-        { key: 5, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
-        { key: 6, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
-        { key: 7, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
-        { key: 8, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
-        { key: 9, sender_name: 'Lev', text: 'Я щас вымок весь под дождём(' },
-        { key: 10, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' }
+        { key: 1, src: '', sender_name: 'sss', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
+        { key: 2, src: '', sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
+        { key: 3, src: '', sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
+        { key: 4, src: '', sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
+        { key: 5, src: '', sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
+        { key: 6, src: '', sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
+        { key: 7, src: '', sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
+        { key: 8, src: '', sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' },
+        { key: 9, src: '', sender_name: 'Lev', text: 'Я щас вымок весь под дождём(' },
+        { key: 10, src: '', sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' }
     ])
     const [msgs, setMsgs] = useState('')
-    
+
 
     const scrollToBottom = () => {
         messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
@@ -27,12 +27,16 @@ function ChatComp(props) {
 
     const messagesList = Object.keys(messages).map((message) =>
         <div key={message.toString()}>
-            <CardGrid size="l">
+            <FormLayoutGroup>
+                <Avatar src={messages[message].src}></Avatar>
+                <Spacing></Spacing>
                 <ContentCard
+                    // src={messages[message].src}
                     subtitle={messages[message].sender_name}
                     mode="outline"
                     text={messages[message].text} />
-            </CardGrid>
+                    <Spacing></Spacing>
+            </FormLayoutGroup>
             <Spacing></Spacing>
             <div ref={messagesEndRef}></div>
         </div>
@@ -43,7 +47,8 @@ function ChatComp(props) {
         e.preventDefault();
         const newMsg = {
             id: Date.now(),
-            sender_name: props.first_name + ' '+ props.last_name,
+            src: props.photo_100,
+            sender_name: props.first_name + ' ' + props.last_name,
             text: msgs
         }
         if (msgs.length > 0 & msgs != " ") {

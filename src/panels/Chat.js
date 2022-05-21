@@ -12,7 +12,7 @@ const Chat = ({fetchedUser, ...props}) => (
 		>
 			Chat
 		</PanelHeader>
-		<ChatComp first_name={fetchedUser.first_name} last_name={fetchedUser.last_name}></ChatComp>
+		<ChatComp first_name={fetchedUser.first_name} last_name={fetchedUser.last_name} photo_100={fetchedUser.photo_200}></ChatComp>
 	</Panel>
 );
 
