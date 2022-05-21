@@ -4,7 +4,7 @@ import MessageComp from '../components/MessageComp';
 import { Spacing } from '@vkontakte/vkui';
 
 function MessageList(props) {
-    const messagesList = React.createRef();
+    //const messagesList = React.createRef();
 
     // useEffect(() => {
     //     messagesList.current.scrollTop = messagesList.current.scrollHeight
@@ -25,11 +25,13 @@ function MessageList(props) {
         { id: 10, sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути' }
     ])
 
+    const messagesList = messages.map(message =>
+        <MessageComp message={message} key={message.id} />  
+    )
+
     return (
         <section className="messageList">
-            {messages.map(message =>
-                <MessageComp message={message} key={message.id} />
-            )}
+            {messagesList}
             <Spacing size={36} />
         </section>
     );
