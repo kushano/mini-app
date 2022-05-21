@@ -44,8 +44,10 @@ function ChatComp() {
             sender_name: 'wlsdw',
             text: msgs
         }
-        setMessages([...messages, newMsg])
-        setMsgs('')
+        if (msgs.length > 0 & msgs != " ") {
+            setMessages([...messages, newMsg])
+            setMsgs('')
+        }
     }
 
     return (
