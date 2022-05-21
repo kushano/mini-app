@@ -1,4 +1,4 @@
-import React,  {useEffect} from 'react';
+import React,  {useEffect, useState} from 'react';
 import MessageComp from '../components/MessageComp';
 import MessageBox from './MessageBox';
 
@@ -9,11 +9,16 @@ function MessageList(props) {
     //     messagesList.current.scrollTop = messagesList.current.scrollHeight
     // }, [props, messagesList]);
 
+    const [messages, setMessages] = useState([
+        {sender_name: 'Vladislav', text: 'ой, блять заебался, сделал коммит, он не сделался, сделал сейчас хуйни, рестор только к началу, по сути'},
+        {sender_name: 'Lev', text: 'Я щас вымок весь под дождём('}
+    ])
+
     return (
-        <div className="MessageList">
-            <MessageComp message={{sender_name: 'Vladislav', text: 'hi'}}></MessageComp>
-            <MessageComp message={{sender_name: 'Vladislav', text: 'hisssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss'}}></MessageComp>
-            <MessageBox></MessageBox>
+        <div className="messageList">
+            {messages.map(message =>
+                <MessageComp message={message}/>
+            )}
         </div>
     );
 }

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Panel, PanelHeader, PanelHeaderBack } from '@vkontakte/vkui';
+import { FixedLayout, Panel, PanelHeader, PanelHeaderBack } from '@vkontakte/vkui';
 import MessageList from '../components/MessageList';
+import MessageBox from '../components/MessageBox';
 
 const Chat = props => (
 	<Panel id={props.id}>
@@ -12,6 +13,9 @@ const Chat = props => (
 			Chat
 		</PanelHeader>
         <MessageList></MessageList>
+        <FixedLayout filled vertical='bottom'>
+            <MessageBox/>
+        </FixedLayout>
 	</Panel>
 );
 
