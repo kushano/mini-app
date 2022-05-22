@@ -28,14 +28,17 @@ function ChatComp(props) {
     const messagesList = Object.keys(messages).map((message) =>
         <div key={message.toString()}>
             <FormLayoutGroup>
-                <Avatar src={messages[message].src}></Avatar>
-                <Spacing></Spacing>
+                {/* <Avatar src={messages[message].src}></Avatar> */}
+                {/* <Spacing></Spacing> */}
                 <ContentCard
+                    subtitle={
+                        <Avatar src={messages[message].src}/>
+                    }
                     // src={messages[message].src}
-                    subtitle={messages[message].sender_name}
+                    header={messages[message].sender_name}
                     mode="outline"
                     text={messages[message].text} />
-                    <Spacing></Spacing>
+                    {/* <Spacing></Spacing> */}
             </FormLayoutGroup>
             <Spacing></Spacing>
             <div ref={messagesEndRef}></div>
