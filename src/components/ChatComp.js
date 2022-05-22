@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import bridge from '@vkontakte/vk-bridge';
 import { Avatar, ScreenSpinner, CardGrid, ContentCard, Input, Button, FixedLayout, Panel, PanelHeader, PanelHeaderBack, Spacing, FormLayoutGroup } from '@vkontakte/vkui';
 
+import { Low } from 'lowdb/lib';
+
 function ChatComp(props) {
     const messagesEndRef = useRef(null)
     const [messages, setMessages] = useState([
